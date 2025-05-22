@@ -28,11 +28,7 @@ public class AuthController {
             User user = userOpt.get();
             if (user.getPassword() != null && user.getPassword().equals(password)) {
                 // Return JSON with message and email
-                Map<String, String> response = Map.of(
-                    "message", "Login successful",
-                    "email", user.getEmail()
-                );
-                return ResponseEntity.ok(response);
+                return ResponseEntity.ok(user);
             }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid email or password"));
