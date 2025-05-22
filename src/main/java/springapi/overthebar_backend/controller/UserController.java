@@ -1,33 +1,33 @@
 package springapi.overthebar_backend.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import springapi.overthebar_backend.model.User;
 import springapi.overthebar_backend.service.UserService;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/api/users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
-
+    @Autowired
     private UserService userService;
 
-    @Autowired
-    public UserController(UserService userService){
-        this.userService = userService;
+    @PostMapping("/signup")
+    public ResponseEntity<String> signUp(@RequestBody User user) {
+        if (userService.getUserByEmail(user.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("User already exists");
+        }
+        userService.saveUser(user);
+        return ResponseEntity.ok("User registered successfully");
     }
 
-    @GetMapping("/user")
-    public User getUser(@RequestParam Integer id){
-        Optional user = userService.getUser(id);
-        if (user.isPresent()){
-            return (User) user.get();
-        }
-        return null;
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
-    
 }
