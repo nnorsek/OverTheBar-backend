@@ -1,72 +1,61 @@
 package springapi.overthebar_backend.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
-    private int age;
+
+    @Column(unique = true, nullable = false)
     private String email;
-    private String level;
+
+    private String password;
+
+    @Column(name = "experience_level")
+    private String experienceLevel;
+
     private int progression;
 
-    public User(int age, String email, int id, String level, String name, int progression) {
-        this.age = age;
+    public User() {
+    }
+
+    public User(String email, int id, String experienceLevel, String name, int progression) {
         this.email = email;
         this.id = id;
-        this.level = level;
+        this.experienceLevel = experienceLevel;
         this.name = name;
         this.progression = progression;
     }
 
-    public int getId() {
-        return id;
-    }
+    // Getters and Setters
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getId() { return id; }
 
-    public String getName() {
-        return name;
-    }
+    public void setId(int id) { this.id = id; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getPassword() { return password; }
 
-    public int getAge() {
-        return age;
-    }
+    public void setPassword(String password) { this.password = password; }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+    public String getName() { return name; }
 
-    public String getEmail() {
-        return email;
-    }
+    public void setName(String name) { this.name = name; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getEmail() { return email; }
 
-    public String getLevel() {
-        return level;
-    }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
+    public String getExperienceLevel() { return experienceLevel; }
 
-    public int getProgression() {
-        return progression;
-    }
+    public void setExperienceLevel(String experienceLevel) { this.experienceLevel = experienceLevel; }
 
-    public void setProgression(int progression) {
-        this.progression = progression;
-    }
+    public int getProgression() { return progression; }
 
-
-    
-
+    public void setProgression(int progression) { this.progression = progression; }
 }
