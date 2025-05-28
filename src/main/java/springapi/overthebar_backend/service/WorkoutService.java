@@ -1,9 +1,11 @@
 package springapi.overthebar_backend.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import springapi.overthebar_backend.model.Workout;
 import springapi.overthebar_backend.repository.WorkoutRepository;
-import java.util.Optional;
 
 @Service
 public class WorkoutService {
@@ -16,9 +18,9 @@ public class WorkoutService {
 
     public Workout findByLevel(String level) {
         System.out.println("Searching for workout level: '" + level + "'");
-        Optional<Workout> workoutOpt = workoutRepository.findByLevelIgnoreCaseTest();
-        System.out.println("Found workout? " + workoutOpt.isPresent());
-        return workoutOpt.orElseThrow(() -> new RuntimeException("Workout not found"));
+        List<Workout> workouts = workoutRepository.findByLevel(level);
+        System.out.println("Found workout? " + !workouts.isEmpty());
+        return workouts.isEmpty() ? null : workouts.get(0);
     }
     
 }

@@ -1,26 +1,51 @@
 package springapi.overthebar_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
-@Entity
+@Document(collection = "sections")
 public class Section {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    private String label;
-    private int time;
+   @Id
+   private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "workout_id")
-    @JsonBackReference
-    private Workout workout;
-    
+   private String label;
+   private int time;
+
+   @DBRef
+   private Workout workout;
+
+   // Getters and setters
+   public String getId() {
+       return id;
+   }
+
+   public void setId(String id) {
+       this.id = id;
+   }
+
+   public String getLabel() {
+       return label;
+   }
+
+   public void setLabel(String label) {
+       this.label = label;
+   }
+
+   public int getTime() {
+       return time;
+   }
+
+   public void setTime(int time) {
+       this.time = time;
+   }
+
+   public Workout getWorkout() {
+       return workout;
+   }
+
+   public void setWorkout(Workout workout) {
+       this.workout = workout;
+   }
 }

@@ -1,31 +1,25 @@
 package springapi.overthebar_backend.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "users")
+
+@Document(collection = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
 
     private String name;
-
-    @Column(unique = true, nullable = false)
     private String email;
-
     private String password;
-
-    @Column(name = "experience_level")
     private String experienceLevel;
-
     private int progression;
 
     public User() {
     }
 
-    public User(String email, int id, String experienceLevel, String name, int progression) {
+    public User(String email, String id, String experienceLevel, String name, int progression) {
         this.email = email;
         this.id = id;
         this.experienceLevel = experienceLevel;
@@ -35,9 +29,9 @@ public class User {
 
     // Getters and Setters
 
-    public int getId() { return id; }
+    public String getId() { return id; }
 
-    public void setId(int id) { this.id = id; }
+    public void setId(String id) { this.id = id; }
 
     public String getPassword() { return password; }
 
