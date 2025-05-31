@@ -1,24 +1,48 @@
 package springapi.overthebar_backend.controller;
 
-import org.springframework.web.bind.annotation.*;
-import springapi.overthebar_backend.model.Workout;
-import springapi.overthebar_backend.repository.WorkoutRepository;
-import springapi.overthebar_backend.service.WorkoutService;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import springapi.overthebar_backend.repository.ProgramRepository;
+import springapi.overthebar_backend.service.ProgramService;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import springapi.overthebar_backend.model.Program;
+
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 @RestController
-@RequestMapping("/api/programs")
+@RequestMapping("/api/program")
+@CrossOrigin(origins = "*")
 public class ProgramController {
 
-    private final WorkoutService workoutService;
+    @Autowired
+    private ProgramService programService;
 
-    public ProgramController(WorkoutService workoutService) {
-        this.workoutService = workoutService;
+    private final ProgramRepository programRepository;
+
+    public ProgramController(ProgramRepository programRepository) {
+        this.programRepository = programRepository;
     }
 
-    @GetMapping("/{level}")
-    public Workout getProgramByLevel(@PathVariable String level) {
-        System.out.println("Looking for level: " + level);
-        return workoutService.findByLevel(level);
+    @GetMapping("/{slug}")
+    public Optional<Program> getProgramBySlug(@PathVariable String slug) {
+        return programRepository.findBySlug(slug);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Program>> getAllPrograms() {
+        List<Program> program = programService.getAllPrograms();
+        return ResponseEntity.ok(program);
+    }
+    
 }
-
