@@ -1,4 +1,5 @@
 package springapi.overthebar_backend;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ import springapi.overthebar_backend.repository.ProgramRepository;
 public class OverthebarBackendApplication {
 
 	public static void main(String[] args) {
+		Dotenv dotenv = Dotenv.load();
+        System.setProperty("MONGODB_URI", dotenv.get("MONGODB_URI"));
 		SpringApplication.run(OverthebarBackendApplication.class, args);
 	}
 

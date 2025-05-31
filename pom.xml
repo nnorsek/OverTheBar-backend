@@ -35,6 +35,13 @@
            <groupId>org.springframework.boot</groupId>
            <artifactId>spring-boot-starter-data-mongodb</artifactId>
        </dependency>
+       
+        <!-- Run env at runtime -->
+       <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.0.0</version>
+        </dependency>
 
        <!-- Web Services (if needed for SOAP or advanced HTTP services) -->
        <dependency>
