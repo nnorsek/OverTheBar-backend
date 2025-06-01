@@ -8,4 +8,6 @@ import springapi.overthebar_backend.model.Program;
 
 public interface ProgramRepository extends MongoRepository<Program, String>{
         Optional<Program> findBySlug(String slug);
+
+        boolean existsBySlug(String slug);
 }

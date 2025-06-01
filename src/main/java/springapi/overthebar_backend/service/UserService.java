@@ -24,5 +24,24 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    public boolean updateUserProgress(String email, int points) {
+        Optional<User> optionalUser = getUserByEmail(email);
+        if (optionalUser.isEmpty()) return false;
+    
+        User user = optionalUser.get();
+        int updatedProgress = user.getProgression() + points;
+        user.setProgression(updatedProgress);
+    
+        // Update level based on progression
+        if (updatedProgress >= 11) user.setExperienceLevel("Expert");
+        else if (updatedProgress >= 7) user.setExperienceLevel("Advanced");
+        else if (updatedProgress >= 3) user.setExperienceLevel("Intermediate");
+        else user.setExperienceLevel("Beginner");
+    
+        saveUser(user);
+        return true;
+    }
+    
     
 }

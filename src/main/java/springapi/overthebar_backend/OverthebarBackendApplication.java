@@ -22,9 +22,9 @@ public class OverthebarBackendApplication {
 	}
 
 	@Bean
-	CommandLineRunner seed(ProgramRepository repo) {
+    CommandLineRunner seed(ProgramRepository repo) {
     return args -> {
-        if (repo.count() == 0) {
+        if (!repo.existsBySlug("stretching-and-mobility")) {
             var sections = List.of(
                 new ProgramSection("Warm-Up", 0),
                 new ProgramSection("Skill Explanation", 60),
@@ -32,17 +32,17 @@ public class OverthebarBackendApplication {
                 new ProgramSection("Cooldown", 180)
             );
 
-            Program beginner = new Program();
-            beginner.setSlug("beginner");
-            beginner.setTitle("Beginner Program");
-            beginner.setDescription("Start your journey with foundational calisthenics.");
-            beginner.setVideoSrc("https://www.youtube.com/embed/kuUZYUBHryw");
-            beginner.setLevel("Beginner");
-            beginner.setSections(sections);
+            Program stretchingAndMobility = new Program();
+            stretchingAndMobility.setSlug("stretching-and-mobility");
+            stretchingAndMobility.setTitle("Stretching and Mobility Program");
+            stretchingAndMobility.setDescription("The first step to every workout.");
+            stretchingAndMobility.setVideoSrc("https://www.youtube.com/embed/bg5ltVL3fok");
+            stretchingAndMobility.setLevel("beginner");
+            stretchingAndMobility.setSections(sections);
 
-            repo.save(beginner);
-        	}
-    	};
-	}
+            repo.save(stretchingAndMobility);
+        }
+    };
+}
 
 }

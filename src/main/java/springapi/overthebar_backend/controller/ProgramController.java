@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import springapi.overthebar_backend.model.Program;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 
 @RestController
