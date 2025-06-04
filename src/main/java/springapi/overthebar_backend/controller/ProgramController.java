@@ -42,5 +42,4 @@ public class ProgramController {
         List<Program> program = programService.getAllPrograms();
         return ResponseEntity.ok(program);
     }
-    
 }

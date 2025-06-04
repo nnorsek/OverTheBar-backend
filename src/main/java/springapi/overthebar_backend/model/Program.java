@@ -12,24 +12,33 @@ public class Program {
 
     private String slug;
     private String title;
+    private List<Image> images;
     private String description;
     private String videoSrc;
     private String level;
     private List<ProgramSection> sections;
 
-
     public Program() {
     }
 
-    public Program(String id, String slug, String title, String description, String videoSrc, String level,
+    public Program(String id, List<Image> images, String slug, String title, String description, String videoSrc, String level,
             List<ProgramSection> sections) {
         this.id = id;
+        this.images = images;
         this.slug = slug;
         this.title = title;
         this.description = description;
         this.videoSrc = videoSrc;
         this.level = level;
         this.sections = sections;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
 
