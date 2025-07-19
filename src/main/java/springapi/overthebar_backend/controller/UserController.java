@@ -7,8 +7,10 @@ import springapi.overthebar_backend.model.User;
 import springapi.overthebar_backend.service.UserService;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -56,7 +58,22 @@ public class UserController {
         return ResponseEntity.ok(updated);
     }
 
+    @PutMapping("/reset")
+    public ResponseEntity<User> resetUserStats(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
 
+        Optional<User> optionalUser = userService.getUserByEmail(email);
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
 
+        User user = optionalUser.get();
+        user.setProgression(0);
+        user.setExperienceLevel("Beginner");
+        user.setCompletedPrograms(new ArrayList<>()); // Clear program history
+
+        User updated = userService.saveUser(user);
+        return ResponseEntity.ok(updated);
+}
 
 }

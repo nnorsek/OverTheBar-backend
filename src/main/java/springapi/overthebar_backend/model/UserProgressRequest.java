@@ -4,7 +4,6 @@ public class UserProgressRequest {
     private String email;
     private int points;
 
-    // Getters and setters
     public String getEmail() {
         return email;
     }
