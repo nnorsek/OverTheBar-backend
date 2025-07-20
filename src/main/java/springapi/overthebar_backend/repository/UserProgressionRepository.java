@@ -8,4 +8,7 @@ import springapi.overthebar_backend.model.UserProgression;
 
 public interface UserProgressionRepository extends MongoRepository<UserProgression, String> {
     List<UserProgression> findByEmailOrderByMonthAsc(String email);
+
+    void deleteByEmail(String email);
+
 }

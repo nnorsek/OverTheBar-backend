@@ -1,10 +1,10 @@
 package springapi.overthebar_backend.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "users")
 public class User {
@@ -33,7 +33,6 @@ public class User {
         this.completedPrograms = completedPrograms;
     }
 
-    // Getters and Setters
 
     public String getId() { return id; }
 
@@ -55,7 +54,10 @@ public class User {
 
     public void setExperienceLevel(String experienceLevel) { this.experienceLevel = experienceLevel; }
 
-    public int getProgression() { return progression; }
+    public int getProgression() { 
+        System.out.println("getProgression called, value=" + this.progression); 
+        return progression; 
+    }
 
     public void setProgression(int progression) { this.progression = progression; }
 
